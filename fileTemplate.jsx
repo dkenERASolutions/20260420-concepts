@@ -22,3 +22,13 @@ function Greeting2() {
 return <h1 className='text-xl text-blue-600'>Welcome back, learner!</h1>;
 }
 // ... (write 3 more variations)
+
+function Greeting1() {
+    return <h1 className="text-2x1 font-bold">
+        Hello from Component 1
+    </h1>
+}
+
+function Greeting2() {
+    return <h1
+}

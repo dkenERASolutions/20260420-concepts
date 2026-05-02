@@ -23,6 +23,7 @@ return <h1 className='text-xl text-blue-600'>Welcome back, learner!</h1>;
 }
 // ... (write 3 more variations)
 
+<<<<<<< HEAD
 function Greeting3() {
     return <h1 className="text-2x1 text-red-100">Ready to go, learner?</h1>;
 }
@@ -276,3 +277,5 @@ function Counter() {
         </div>
     );
 }
+=======
+>>>>>>> c0eff83 (modified warrenmarcus.jsx)

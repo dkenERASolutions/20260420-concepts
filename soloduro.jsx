@@ -320,3 +320,91 @@ function Counter() {
     );
 }
 
+// useReducer: the reducer takes the current state + an "action" and returns thr next state
+
+function cartReducer(state, action) {
+    switch (action.type) {
+        case "add":
+            return [...state, action.item];
+        case "remove":
+            return state.filter(item => item.id !== action.action.id);
+        case "CLEAR_CART":
+            return [];
+        default:
+            return state;
+    }
+}
+
+function Cart () {
+    const [cart, dispatch] = useReducer(cartReducer, []);
+
+    const addlatte = () =>
+        dispatch({ type: "add", item: { id: Date.now(), name: "Latte",}})
+
+    return(
+        <div>
+            <button onClick={addlatte}>Add Latte</button>
+            <button onClick={() => dispatch({ type: "CLEAR_CART" })}>Clear Cart</button>
+            <ul>
+                {cart.map(i> (
+                    <li
+                    key={item.id}
+                    >
+                    {item.name}
+                    <button onClick={() => dispatch({ type: "remove", id: item.id })}>Remove</button>
+                    </li>
+                ))}
+            </ul>
+        </div>
+    );
+}
+
+
+function cart {
+    const [cart, dispatch] = useReducer(cartReducer, []);
+
+    const addlatte = () =>
+        dispatch({ type: "add", item: { id: Date.now(), name: "Latte",}})
+
+    return(
+        <div>
+            <button onClick={addlatte}>Add Latte</button>
+            <button onClick={() => dispatch({ type: "CLEAR_CART" })}>Clear Cart</button>
+            <ul>
+                {cart.map(item => (
+                    <li
+                    key={item.id}
+                    >
+                    {item.name}
+                    <button onClick={() => dispatch({ type: "remove", id: item.id })}>Remove</button>
+                    </li>
+                ))}
+            </ul>
+        </div>
+    );
+}
+
+function cart {
+    const [cart, dispatch] = useReducer(cartReducer, []);
+
+    const addlatte = () =>
+        dispatch({ type: "add", item: { id: Date.now(), name: "Latte",}})
+
+    return(
+        <div>
+            <button onClick={addlatte}>Add Latte</button>
+            <button onClick={() => dispatch({ type: "CLEAR_CART" })}>Clear Cart</button>
+            <ul>
+                {cart.map(item => (
+                    <li
+                    key={item.id}
+                    >
+                    {item.name}
+                    <button onClick={() => dispatch({ type: "remove", id: item.id })}>Remove</button>
+                    </li>
+                ))}
+            </ul>
+        </div>
+    );
+}
+

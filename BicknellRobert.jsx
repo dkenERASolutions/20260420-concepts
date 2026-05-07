@@ -257,3 +257,104 @@ function Counter() {
         </div>
     );
 }
+
+// useContext- Sharing data across components
+// Step 1: create a context ( a "channel" any component can tune into )
+const ThemeContext = createContext("light");
+
+// Step 2: A top level Provider hands a value to everyone underneath
+function App() {
+    const [theme, setTheme] = useState("light");
+    
+    return(
+        <ThemeContext.Provider value={theme}>
+            <button
+                onClick={() => setTheme( t => t === "light" ? "dark" : "light")}
+            >
+                Toggle Theme
+            </button>
+            <Page />
+        </ThemeContext.Provider>
+    );
+}
+
+function Page() {
+    return(
+        <Card />
+    );
+}
+
+function Card() {
+    const theme = useContext(ThemeContext);
+    return(
+        <div className={`card card-${theme}`}>
+            Theme is: {theme}
+        </div>
+    );
+}
+
+// 
+const ThemeContext = createContext("light");
+
+function App() {
+    const [theme, setTheme] = useState("light");
+    
+    return(
+        <ThemeContext.Provider value={theme}>
+            <button
+                onClick={() => setTheme( t => t === "light" ? "dark" : "light")}
+            >
+                Toggle Theme
+            </button>
+            <Page />
+        </ThemeContext.Provider>
+    );
+}
+
+function Page() {
+    return(
+        <Card />
+    );
+}
+
+function Card() {
+    const theme = useContext(ThemeContext);
+    return(
+        <div className={`card card-${theme}`}>
+            Theme is: {theme}
+        </div>
+    );
+}
+
+//
+const ThemeContext = createContext("light");
+
+function App() {
+    const [theme, setTheme] = useState("light");
+    
+    return(
+        <ThemeContext.Provider value={theme}>
+            <button
+                onClick={() => setTheme( t => t === "light" ? "dark" : "light")}
+            >
+                Toggle Theme
+            </button>
+            <Page />
+        </ThemeContext.Provider>
+    );
+}
+
+function Page() {
+    return(
+        <Card />
+    );
+}
+
+function Card() {
+    const theme = useContext(ThemeContext);
+    return(
+        <div className={`card card-${theme}`}>
+            Theme is: {theme}
+        </div>
+    );
+}

@@ -1,7 +1,7 @@
 // ============================================================
 // ERA ACADEMY — React Concepts Repetition File
-// Student: [Ken] [Danny]
-// GitHub: [dkenERASolutions]
+// Student: [Bicknell] [Robert]
+// GitHub: [RBicknell0523]
 // ============================================================
 // INSTRUCTIONS:
 // Write each concept block 5 times.
@@ -9,7 +9,7 @@
 // This builds real muscle memory. Do NOT copy-paste.
 // Commit and push after every writing session.
 // ============================================================
-import { useState, useEffect, useRef, useContext } from 'react';
+import { useState, useEffect, useRef } from 'react';
 // 
 // WEEK 1 — CONCEPTS
 // 
@@ -23,21 +23,53 @@ return <h1 className='text-xl text-blue-600'>Welcome back, learner!</h1>;
 }
 // ... (write 3 more variations)
 function Greeting3() {
-    return <h1 className="text-xl text-blue-600">Welcome back, learner</h1>
-}
-function Greeting4() {
-    return <h1 className="text-xl text-blue-600">Welcome back, learner</h1>
-}
-function Greeting5() {
-    return <h1 className="text-xl text-blue-600">Welcome back, learner</h1>
+    return <h1 className="text-lg text-green-500">Hello from Component 3</h1>
 }
 
+function Greeting4() {
+    return <h1 className="text-md font-italic">Greetings, student!</h1>
+}
+
+function Greeting5() {
+    return <h1 className="text-3xl text-white-700">Welcome from Component 5</h1>
+}
+
+function Greeting6() {
+    return <h1 className="text-sm text-black-200">Hello again, learner!</h1>
+}
 
 // Concept 1: Functional Component + JSX Return
 function MyComponent() {
     return(
         <div className="container">
             <h1>My component</h1>
+            <p>This is a paragraph</p>
+        </div>
+    );
+}
+
+function MyComponent() {
+    return(
+        <div className="container">
+            <h1>My Component</h1>
+            <p>This is a paragraph</p>
+        </div>
+    );
+}
+
+function MyComponent() {
+    return(
+        <div className="container">
+            <h1>My Component</h1>
+            <p>This is a paragraph</p>
+        </div>
+    );
+}
+
+function MyComponent() {
+    return(
+        <div className="container">
+            <h1>My Component</h1>
             <p>This is a paragraph.</p>
         </div>
     );
@@ -46,46 +78,20 @@ function MyComponent() {
 function MyComponent() {
     return(
         <div className="container">
-            <h1>My component</h1>
+            <h1>My Component</h1>
             <p>This is a paragraph.</p>
         </div>
     );
 }
 
-function MyComponent() {
-    return(
-        <div className="container">
-            <h1>My component</h1>
-            <p>This is a paragraph.</p>
-        </div>
-    );
-}
-
-function MyComponent() {
-    return(
-        <div className="container">
-            <h1>My component</h1>
-            <p>This is a paragraph.</p>
-        </div>
-    );
-}
-
-function MyComponent() {
-    return(
-        <div className="container">
-            <h1>My component</h1>
-            <p>This is a paragraph.</p>
-        </div>
-    );
-}
-
-// Concept 2: Export Default
+// Concept 2: Export Default + Import in App.jsx
 export default function Header() {
     return(
         <header className="navbar">Site Header</header>
-    ); 
+    );
 }
 
+// In the app.jsx
 import Header from "./components/Header";
 
 export default function Header() {
@@ -94,30 +100,37 @@ export default function Header() {
     );
 }
 
+// In the app.jsx
 import Header from "./components/Header";
+
 export default function Header() {
     return(
         <header className="navbar">Site Header</header>
     );
 }
 
+// In the app.jsx
 import Header from "./components/Header";
+
+export default function Header() {
+    return(
+        <header className="./components/Header">Site Header</header>
+    );
+}
+
+// In the app.jsx
+import Header from "./components/Header";
+
 export default function Header() {
     return(
         <header className="navbar">Site Header</header>
     );
 }
 
-import Header from "./components/Header";
-export default function Header() {
-    return(
-        <header className="navbar">Site Header</header>
-    );
-}
-
+// In the app.jsx
 import Header from "./components/Header";
 
-// Concept 3: JSX with Embedded JavaScript 
+// Concept 3: JSX with Embedded JavaScript
 function PriceTag() {
     const price = 18.99
     const label = "Ethiopian Harrar"
@@ -130,57 +143,53 @@ function PriceTag() {
         </div>
     );
 }
-
+ 
 function PriceTag() {
     const price = 18.99
     const label = "Ethiopian Harrar"
-    
     return(
         <div>
             <h2>{label}</h2>
             <p>${price.toFixed}</p>
             <p>{price > 15 ? "Premium" : "Standard"}</p>
         </div>
-    )
+    );
 }
 
 function PriceTag() {
     const price = 18.99
     const label = "Ethiopian Harrar"
-    
     return(
         <div>
             <h2>{label}</h2>
             <p>${price.toFixed}</p>
             <p>{price > 15 ? "Premium" : "Standard"}</p>
         </div>
-    )
+    );
 }
 
 function PriceTag() {
     const price = 18.99
     const label = "Ethiopian Harrar"
-    
     return(
         <div>
             <h2>{label}</h2>
             <p>${price.toFixed}</p>
             <p>{price > 15 ? "Premium" : "Standard"}</p>
         </div>
-    )
+    );
 }
 
 function PriceTag() {
     const price = 18.99
     const label = "Ethiopian Harrar"
-    
     return(
         <div>
             <h2>{label}</h2>
             <p>${price.toFixed}</p>
             <p>{price > 15 ? "Premium" : "Standard"}</p>
         </div>
-    )
+    );
 }
 
 // Concept 4: useState - Counter Pattern
@@ -190,8 +199,8 @@ function Counter() {
     return(
         <div>
             <p>Count: {count}</p>
-            <button onClick={ () => setCount(count + 1)}>+</button>
-            <button onClick={ () => setCount(count - 1)}>-</button>
+            <button onClick={ () => setCount(count + 1)}></button>
+            <button onClick={ () => setCount(count - 1)}></button>
             <button onClick={ () => setCount(0)}>Reset</button>
         </div>
     );
@@ -203,8 +212,8 @@ function Counter() {
     return(
         <div>
             <p>Count: {count}</p>
-            <button onClick={ () => setCount(count + 1)}>+</button>
-            <button onClick={ () => setCount(count - 1)}>-</button>
+            <button onClick={ () => setCount(count + 1)}></button>
+            <button onClick={ () => setCount(count - 1)}></button>
             <button onClick={ () => setCount(0)}>Reset</button>
         </div>
     );
@@ -216,8 +225,8 @@ function Counter() {
     return(
         <div>
             <p>Count: {count}</p>
-            <button onClick={ () => setCount(count + 1)}>+</button>
-            <button onClick={ () => setCount(count - 1)}>-</button>
+            <button onClick={ () => setCount(count + 1)}></button>
+            <button onClick={ () => setCount(count - 1)}></button>
             <button onClick={ () => setCount(0)}>Reset</button>
         </div>
     );
@@ -229,8 +238,8 @@ function Counter() {
     return(
         <div>
             <p>Count: {count}</p>
-            <button onClick={ () => setCount(count + 1)}>+</button>
-            <button onClick={ () => setCount(count - 1)}>-</button>
+            <button onClick={ () => setCount(count + 1)}></button>
+            <button onClick={ () => setCount(count - 1)}></button>
             <button onClick={ () => setCount(0)}>Reset</button>
         </div>
     );
@@ -242,15 +251,15 @@ function Counter() {
     return(
         <div>
             <p>Count: {count}</p>
-            <button onClick={ () => setCount(count + 1)}>+</button>
-            <button onClick={ () => setCount(count - 1)}>-</button>
+            <button onClick={ () => setCount(count + 1)}></button>
+            <button onClick={ () => setCount(count - 1)}></button>
             <button onClick={ () => setCount(0)}>Reset</button>
         </div>
     );
 }
 
 // useContext- Sharing data across components
-// Step 1: create a context ( a "channel" any component can tune into)
+// Step 1: create a context ( a "channel" any component can tune into )
 const ThemeContext = createContext("light");
 
 // Step 2: A top level Provider hands a value to everyone underneath
@@ -275,7 +284,73 @@ function Page() {
     );
 }
 
-function Card()  {
+function Card() {
+    const theme = useContext(ThemeContext);
+    return(
+        <div className={`card card-${theme}`}>
+            Theme is: {theme}
+        </div>
+    );
+}
+
+// 
+const ThemeContext = createContext("light");
+
+function App() {
+    const [theme, setTheme] = useState("light");
+    
+    return(
+        <ThemeContext.Provider value={theme}>
+            <button
+                onClick={() => setTheme( t => t === "light" ? "dark" : "light")}
+            >
+                Toggle Theme
+            </button>
+            <Page />
+        </ThemeContext.Provider>
+    );
+}
+
+function Page() {
+    return(
+        <Card />
+    );
+}
+
+function Card() {
+    const theme = useContext(ThemeContext);
+    return(
+        <div className={`card card-${theme}`}>
+            Theme is: {theme}
+        </div>
+    );
+}
+
+//
+const ThemeContext = createContext("light");
+
+function App() {
+    const [theme, setTheme] = useState("light");
+    
+    return(
+        <ThemeContext.Provider value={theme}>
+            <button
+                onClick={() => setTheme( t => t === "light" ? "dark" : "light")}
+            >
+                Toggle Theme
+            </button>
+            <Page />
+        </ThemeContext.Provider>
+    );
+}
+
+function Page() {
+    return(
+        <Card />
+    );
+}
+
+function Card() {
     const theme = useContext(ThemeContext);
     return(
         <div className={`card card-${theme}`}>

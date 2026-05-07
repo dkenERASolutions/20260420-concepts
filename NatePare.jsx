@@ -1,7 +1,7 @@
 // ============================================================
 // ERA ACADEMY — React Concepts Repetition File
-// Student: [Ken] [Danny]
-// GitHub: [dkenERASolutions]
+// Student: Nathaniel Pare
+// GitHub: Nate499P
 // ============================================================
 // INSTRUCTIONS:
 // Write each concept block 5 times.
@@ -9,7 +9,7 @@
 // This builds real muscle memory. Do NOT copy-paste.
 // Commit and push after every writing session.
 // ============================================================
-import { useState, useEffect, useRef, useContext } from 'react';
+import { useState, useEffect, useRef } from 'react';
 // 
 // WEEK 1 — CONCEPTS
 // 
@@ -22,68 +22,102 @@ function Greeting2() {
 return <h1 className='text-xl text-blue-600'>Welcome back, learner!</h1>;
 }
 // ... (write 3 more variations)
+
 function Greeting3() {
-    return <h1 className="text-xl text-blue-600">Welcome back, learner</h1>
+    return <h1 className="text-2x1 text-red-100">Ready to go, learner?</h1>;
 }
+
 function Greeting4() {
-    return <h1 className="text-xl text-blue-600">Welcome back, learner</h1>
+    return <h1 className="text-2x1 text-green-300">Sup, superstar! ready to start?</h1>;
 }
+
 function Greeting5() {
-    return <h1 className="text-xl text-blue-600">Welcome back, learner</h1>
+    return <h1 className="text-xl font-bold">working hard? lets get to it!</h1>;
 }
 
+function Greeting6() {
+    return <h1 className="text-lg font-bold">Welcome to another great day!</h1>;
+}
 
-// Concept 1: Functional Component + JSX Return
-function MyComponent() {
-    return(
-        <div className="container">
-            <h1>My component</h1>
-            <p>This is a paragraph.</p>
-        </div>
-    );
+function Greeting6() {
+    return <h1 className=" text-xl text-blue-600">Weclome back, Learner</h1>;
 }
 
 function MyComponent() {
     return(
         <div className="container">
             <h1>My component</h1>
-            <p>This is a paragraph.</p>
+            <p>This is a paragraph</p>
         </div>
     );
 }
 
 function MyComponent() {
     return(
-        <div className="container">
+        <div>
             <h1>My component</h1>
-            <p>This is a paragraph.</p>
+            <p>This is a pragraph</p>
         </div>
     );
 }
 
 function MyComponent() {
     return(
-        <div className="container">
+        <div>
             <h1>My component</h1>
-            <p>This is a paragraph.</p>
+            <p>This is a paragraph</p>
         </div>
     );
 }
 
 function MyComponent() {
     return(
-        <div className="container">
+        <div>
             <h1>My component</h1>
-            <p>This is a paragraph.</p>
+            <p>This is a paragraph</p>
         </div>
     );
 }
 
-// Concept 2: Export Default
+function MyComponent() {
+    return(
+        <div>
+            <h1>My component</h1>
+            <p>This is a paragraph</p>
+        </div>
+    )
+}
+
+// EXPORTING DEFAULT + IMPORTING IT INTO APP.JSX concept 2
+
 export default function Header() {
     return(
         <header className="navbar">Site Header</header>
-    ); 
+    );
+}
+
+import Header from "./components/Header";
+
+export default function Header() {
+    return(
+        <header className="navbar">Site Header</header>
+    );
+}
+
+import Header from "./components/Header";
+
+export default function Header() {
+    return(
+        <header className="navbar">Site Header</header>
+    );
+}
+
+import Header from "./components/Header";
+
+export default function Header() {
+    return(
+        <header className="navbar">Site Header</header>
+    );
 }
 
 import Header from "./components/Header";
@@ -95,29 +129,48 @@ export default function Header() {
 }
 
 import Header from "./components/Header";
-export default function Header() {
+
+// concept 3
+
+function PriceTag() {
+    const price = 18.99
+    const label = "Ethiopian Harrar"
+    
     return(
-        <header className="navbar">Site Header</header>
+        <div>
+            <h2>{label}</h2>
+            <p>${price.toFixed}</p>
+            <p>{price > 15 ? "Premium" : "Standard"}</p>
+        </div>
     );
 }
 
-import Header from "./components/Header";
-export default function Header() {
+function PriceTag() {
+    const price = 18.99
+    const label = "Ethiopian Harrar"
+    
     return(
-        <header className="navbar">Site Header</header>
+        <div>
+            <h2>{label}</h2>
+            <p>${price.toFixed}</p>
+            <p>{price > 15 ? "Premium" : "Standard"}</p>
+        </div>
     );
 }
 
-import Header from "./components/Header";
-export default function Header() {
+function PriceTag() {
+    const price = 18.99
+    const label = "Ethiopian Harrar"
+    
     return(
-        <header className="navbar">Site Header</header>
+        <div>
+            <h2>{label}</h2>
+            <p>${price.toFixed}</p>
+            <p>{price > 15 ? "Premium" : "Standard"}</p>
+        </div>
     );
 }
 
-import Header from "./components/Header";
-
-// Concept 3: JSX with Embedded JavaScript 
 function PriceTag() {
     const price = 18.99
     const label = "Ethiopian Harrar"
@@ -154,132 +207,72 @@ function PriceTag() {
             <p>${price.toFixed}</p>
             <p>{price > 15 ? "Premium" : "Standard"}</p>
         </div>
-    )
+    );
 }
 
-function PriceTag() {
-    const price = 18.99
-    const label = "Ethiopian Harrar"
-    
-    return(
-        <div>
-            <h2>{label}</h2>
-            <p>${price.toFixed}</p>
-            <p>{price > 15 ? "Premium" : "Standard"}</p>
-        </div>
-    )
-}
+// Concept 4
 
-function PriceTag() {
-    const price = 18.99
-    const label = "Ethiopian Harrar"
-    
-    return(
-        <div>
-            <h2>{label}</h2>
-            <p>${price.toFixed}</p>
-            <p>{price > 15 ? "Premium" : "Standard"}</p>
-        </div>
-    )
-}
-
-// Concept 4: useState - Counter Pattern
 function Counter() {
-    const [count, setCount] = useState(0);
+    const [count, setCount] = useState[0];
     
     return(
         <div>
             <p>Count: {count}</p>
             <button onClick={ () => setCount(count + 1)}>+</button>
-            <button onClick={ () => setCount(count - 1)}>-</button>
-            <button onClick={ () => setCount(0)}>Reset</button>
+            <button onClick={ () => setCount(count + 1)}>-</button>
+            <button onClick={ () => setCount(0)}>reset</button>
         </div>
     );
 }
 
 function Counter() {
-    const [count, setCount] = useState(0);
+    const [count, setCount] = useState[0];
     
     return(
         <div>
             <p>Count: {count}</p>
             <button onClick={ () => setCount(count + 1)}>+</button>
-            <button onClick={ () => setCount(count - 1)}>-</button>
-            <button onClick={ () => setCount(0)}>Reset</button>
+            <button onClick={ () => setCount(count + 1)}>-</button>
+            <button onClick={ () => setCount(0)}>reset</button>
         </div>
     );
 }
 
 function Counter() {
-    const [count, setCount] = useState(0);
+    const [count, setCount] = useState[0];
     
     return(
         <div>
             <p>Count: {count}</p>
             <button onClick={ () => setCount(count + 1)}>+</button>
-            <button onClick={ () => setCount(count - 1)}>-</button>
-            <button onClick={ () => setCount(0)}>Reset</button>
+            <button onClick={ () => setCount(count + 1)}>-</button>
+            <button onClick={ () => setCount(0)}>reset</button>
         </div>
     );
 }
 
 function Counter() {
-    const [count, setCount] = useState(0);
+    const [count, setCount] = useState[0];
     
     return(
         <div>
             <p>Count: {count}</p>
             <button onClick={ () => setCount(count + 1)}>+</button>
-            <button onClick={ () => setCount(count - 1)}>-</button>
-            <button onClick={ () => setCount(0)}>Reset</button>
+            <button onClick={ () => setCount(count + 1)}>-</button>
+            <button onClick={ () => setCount(0)}>reset</button>
         </div>
     );
 }
 
 function Counter() {
-    const [count, setCount] = useState(0);
+    const [count, setCount] = useState[0];
     
     return(
         <div>
             <p>Count: {count}</p>
             <button onClick={ () => setCount(count + 1)}>+</button>
-            <button onClick={ () => setCount(count - 1)}>-</button>
-            <button onClick={ () => setCount(0)}>Reset</button>
-        </div>
-    );
-}
-
-// useContext- Sharing data across components
-// Step 1: create a context ( a "channel" any component can tune into)
-const ThemeContext = createContext("light");
-
-// Step 2: A top level Provider hands a value to everyone underneath
-function App() {
-    const [theme, setTheme] = useState("light");
-    
-    return(
-        <ThemeContext.Provider value={theme}>
-            <button
-                onClick={() => setTheme( t => t === "light" ? "dark" : "light")}
-            >
-                Toggle Theme
-            </button>
-            <Page />
-        </ThemeContext.Provider>
-    );
-}
-
-function Page() {
-    return(
-        <Card />
-    );
-}
-
-function Card()  {
-    const theme = useContext(ThemeContext);
-    return(
-        <div className={`card card-${theme}`}>
-            Theme is: {theme}
+            <button onClick={ () => setCount(count + 1)}>-</button>
+            <button onClick={ () => setCount(0)}>reset</button>
         </div>
     );
 }

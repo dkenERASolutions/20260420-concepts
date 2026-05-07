@@ -302,3 +302,108 @@ function Counter() {
     );
 }
 
+// useContent- Sharing data across components
+// Step 1: Create a context (a "channel" any component can tune into )
+const ThemeCount = createContent("light");
+
+// Step 2: A top level Porvider hands a value to everyone underneath
+function App() {
+    const [theme, setTheme] = useState("light");
+    
+        return(
+        <ThemeContent.Provider value={theme}>
+            <button
+            onClick={() => setTheme( t => t === "light" ? "dark" : "light")}
+            >
+                Toggle Theme
+            </button>
+            <Page />
+        </ThemeContent.Provider>
+    );
+}
+
+function Page() {
+    return(
+    <Card />    
+    );
+}
+
+function Card() {
+    const theme = useContext(ThemeContext);
+    return(
+        <div className={`card card-${theme}`}>
+            Theme is: {theme}
+        </div>
+    );
+}
+
+const ThemeContext = createContent("light")
+
+function App() {
+    const[theme, setTheme] = useState("light");
+    
+    return(
+        <ThemeContext.Provider value={theme}>
+            <button 
+            onClick ={() => setTheme( t => t === "light" ? "dark" : "light")}
+            >
+                Toggle Theme
+            </button>
+            <Page />
+        </ThemeContext.Provider>
+        
+    );
+}
+
+function Card() {
+    const theme = useContext(ThemeContext);
+    return(
+        <div className={`card card-${theme}`}>
+            Theme is: {theme}
+        </div>
+    );
+}
+
+const ThemeContext = createContext("light")
+
+function App() {
+    
+    const[theme, setTheme] = useState("light");
+    return(
+        <ThemeContext.Provider value={theme}>
+            <button
+            onClick={() => setTheme(t => t === "light" ? "dark" : "light")}   
+                  >
+                Toggle Theme
+            </button>
+            <Page />
+        </ThemeContext.Provider>
+    );
+}
+
+function Card() {
+    const theme = useContext(ThemeContext);
+    return(
+        <div className={`card card-${theme}`}>
+            Theme is: {theme}
+        </div>
+    );
+}
+
+const ThemeContext = createContext("light")
+
+function App() {
+    
+    const[theme, setTheme] = useState("light");
+    return(
+        <ThemeContext.Provider value={theme}>
+            <button
+            onClick={() => setTheme(t => t === "light" ? "dark" : "light")}   
+                  >
+                Toggle Theme
+            </button>
+            <Page />
+        </ThemeContext.Provider>
+    );
+}
+

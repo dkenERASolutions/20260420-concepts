@@ -579,3 +579,25 @@ function Modal() {
         </div>
     );
 }
+
+// custom hook - useLocalStorage (this is a state that survives a refresh)
+function useLocalStorage(key, defaultValue)
+    const [value, setValue] = useState( () => {
+        const stored = localStorage.getItem(key);
+        return stored !==null ? JSON.parse(stored) : defaultValue;
+    });
+    
+    useEffect(() => {
+        localStorage.setItem(key, JASON.stringify(value));
+    }, [key, value]);
+    
+    function Settings() {
+        const [username, setUsername] = useLovalStorage("username", "");
+        return(
+            <input
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+                placeholder="Type your name - then refresh the page!"
+                />
+        )
+    }

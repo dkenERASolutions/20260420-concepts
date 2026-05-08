@@ -9,7 +9,7 @@
 // This builds real muscle memory. Do NOT copy-paste.
 // Commit and push after every writing session.
 // ============================================================
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useMemo } from 'react';
 // 
 // WEEK 1 — CONCEPTS
 // 
@@ -512,6 +512,63 @@ function cartReducer() {
                         <button onClick={() => dispatch({ type: "remove", id: i.id})}>X</button>
                     </li>
                 ))}
+            </ul>
+        </div>
+    );
+}
+
+// useMemo - Caching an expensive calucation 
+function ProductFilter( {products }) {
+    const [search, setSearch] = useState ("");
+    const [color, setColor] = useState("blue");
+    
+    const filtered = useMemo( () => {
+        console.log("Filtering products...");
+return products.filter( p => p.name.toLowerCase().includes(search.toLocaleLowerCase()));
+    }, [products, search]);
+    
+    return(
+        <div>
+            <input
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            placeholder="Search Products"
+           /> 
+            <input 
+            value={color}
+            onChange={(e) => setColor(e.target.value)}
+            placeholder="Favorite color (does NOT re-filter)"
+            />    
+            <ul>
+                {filtered.map( p => <li key={p.id}>{p.name}</li>)}
+            </ul>
+        </div>
+    );
+}
+
+function ProductFilter( {products }) {
+    const [search, setSearch] = useState ("");
+    const [color, setColor] = useState("blue");
+    
+    const filtered = useMemo( () => {
+        console.log("Filtering products...");
+return products.filter( p => p.name.toLowerCase().includes(search.toLocaleLowerCase()));
+    }, [products, search]);
+    
+    return(
+        <div>
+            <input
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            placeholder="Search Products"
+           /> 
+            <input 
+            value={color}
+            onChange={(e) => setColor(e.target.value)}
+            placeholder="Favorite color (does NOT re-filter)"
+            />    
+            <ul>
+                {filtered.map( p => <li key={p.id}>{p.name}</li>)}
             </ul>
         </div>
     );

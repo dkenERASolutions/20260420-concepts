@@ -561,3 +561,21 @@ function ProductFiler( { products } ){
         </div>
     );
 }
+
+// Custom Hook - useToggle 
+function useToggle(initial = false) { 
+    cost [ onabort, setOn] = useState(inital);   
+    const toggle = () => setOn(prev => !prev);    
+    return [on, toggle];
+}
+
+function Modal() {
+    const [isOpen, toggleOpen] = useToggle();
+    
+    return(
+        <div>
+            <button onClick={toggleOpen}> {isOpen ? "Close" : "Open"} modal </button>
+            {isOpen && <div className="modal"> I am a modal </div>}
+        </div>
+    );
+}

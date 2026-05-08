@@ -408,3 +408,68 @@ function cart {
     );
 }
 
+
+// useMemo Caching an Expensive Calculation
+function ProductiveFilter( { products } ){
+    const [search, setSearch] = useState("");
+    const [color, setColor] = useState("blue");
+
+    const filteredProducts = useMemo(() => {
+        console.log("Filtering products...");
+        return products.filter(p => p.name.toLowerCase().includes(search.toLowerCase()));
+    }, [search, products]);
+
+    return(
+        <div>
+            <input
+               value={search}
+               onChange={e => setSearch(e.target.value)}
+               placeholder="Search products"
+            />
+            <input
+               value={color}
+               onChange={e => setColor(e.target.value)}
+               placeholder="Favorite Color (does not re-filter)"
+
+            />
+            <ul>
+                {filteredProducts.map(p => <li key={p.id}>{p.name}</li>)}
+            </ul>
+        </div>
+    );
+}
+
+function ProductiveFilter( { products } ){
+    const [search, setSearch] = useState("");
+    const [color, setColor] = useState("blue");
+    Const filtered = useMemo(() => {
+        console.log("Filtering products...");
+        return products.filter(p => p.name.toLowerCase().includes(search.toLowerCase()));
+    }, [products, search]);
+
+    return(
+        <div>
+            <input
+               value={search}
+               onChange={e => setSearch(e.target.value)}
+               placeholder="Search products"
+            />
+            <input
+               value={color}
+               onChange={e => setColor(e.target.value)}
+               placeholder="Favorite Color (does not re-filter)"
+            />
+            <ul>
+                {filtered.map(p => <li key={p.id}>{p.name}</li>)}
+            </ul>
+        </div>
+    );
+}
+
+function ProductiveFilter( { products } ){
+    const [search, setSearch] = useState("");
+    const [color, setColor] = useState("blue");
+    Const filtered = useMemo(() => {
+        console.log("Filtering products...");
+        return products.filter(p => p.name.toLowerCase().includes(search.toLowerCase()));
+    }, [products, search]);

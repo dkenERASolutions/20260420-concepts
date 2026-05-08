@@ -496,3 +496,68 @@ function Cart() {
         </div>
     );
 }
+
+
+// useMemo - Catching an expensive calculation 
+function ProductFiler( { products } ){
+    const [search, setSearch] = useState("");
+    const [color, setColor] = useState("blue");
+    
+    const filtered = useMemo(() => {
+        console.log("Filtering products...");
+        return products.filter(p => p.name.toLowerCase().includes(search.toLowerCase()));
+    }, [products, search]);
+    
+    
+    return(
+        <div>
+            <input
+                value={search}
+                onChange={ (e) => setSearch(e.target.value)}
+                placeholder="Search Products"
+            />
+            <input 
+                value={color}
+                onChange={ (e) => setColor(e.target.value)}
+                placeholder="Favorite color (does NOT re-filter)"
+            
+            />
+            <ul>
+                {filtered.map(p => <li key={p.id}>{p.name}</li>)}
+            </ul>
+            
+        </div>
+    );
+}
+
+// useMemo - Catching an expensive calculation 
+function ProductFiler( { products } ){
+    const [search, setSearch] = useState("");
+    const [color, setColor] = useState("blue");
+    
+    const filtered = useMemo(() => {
+        console.log("Filtering products...");
+        return products.filter(p => p.name.toLowerCase().includes(search.toLowerCase()));
+    }, [products, search]);
+    
+    
+    return(
+        <div>
+            <input
+                value={search}
+                onChange={ (e) => setSearch(e.target.value)}
+                placeholder="Search Products"
+            />
+            <input 
+                value={color}
+                onChange={ (e) => setColor(e.target.value)}
+                placeholder="Favorite color (does NOT re-filter)"
+            
+            />
+            <ul>
+                {filtered.map(p => <li key={p.id}>{p.name}</li>)}
+            </ul>
+            
+        </div>
+    );
+}

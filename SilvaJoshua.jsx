@@ -479,7 +479,7 @@ function ProductFilter({products}) {
             <input 
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
-                placeholder="Search Prdocuts"
+                placeholder="Search Products"
             />
             <input 
                 value={color}
@@ -491,4 +491,73 @@ function ProductFilter({products}) {
             </ul>
         </div>
     );
+}
+
+// Custom Hook - useToggle
+function useToggle(initial = false) {    
+    const [on, setOn] = useState(initial);
+    const toggle = () => setOn(prev => !prev);
+    
+    return [on, toggle];
+}
+
+function Modal() {
+    const [isOpen, toggleOpen] = useToggle(false);
+    
+    return(
+        <div>
+            <button onClick={toggleOpen}>
+                {isOpen ? "Close" : "Open"} modal
+            </button>
+                {isOpen&& <div className="modal">I am a modal</div>}
+        </div>
+    );
+}
+
+// Custom hook - useLocalStorage (this is a state that survives a refresh)
+function useLocalStorage(key, defaultValue) {
+    const [value, setValue] = useState(() => {
+        const stored = localStorage.getItem(key);
+        return stored !== null ? JSON.parse(stored) : defaultValue;
+    });
+    
+    useEffect(() => {
+        localStorage.setItem(key, JSON.stringify(value));
+    },[key, value]);
+    return [value, setValue];
+}
+
+function Settings() {
+    const [username, setUsername] = useLocalStorage("username", "")
+    return(
+        <input
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            placeholder="Type your name - then refresh the page!"
+         />
+    );
+}
+// Custom hook - useFetch (reusable data fetching)
+function useFetch (url) {
+    const [data, setData] = useState(null);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+    
+    useEffect(() => {
+        setLoading(true);
+        fetch(url)
+        .then(res => res.json())
+        .then(json => {setData(json); setLoading(false)})
+        .catch(err => {setError(err); setLoading(false)})
+    })  
+    return {data, loading, error};
+}   
+
+function CoffeeMenu() {
+    const {data, loading, error} = useFetch("/api/coffees");
+    
+    if (loading) return <p>Loading</p>
+    if (error) return <p>Something went wrong</p>
+    
+    return <ul>{data.map(c => <li key={c.id}>{c.name}</li>)}</ul>
 }

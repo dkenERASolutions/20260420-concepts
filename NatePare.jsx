@@ -422,3 +422,29 @@ function Settings() {
         />
     )
 }
+
+//  custom hook - useFetch (reusable data fetching)
+function useFetch(url) {
+    const [data, setData] = useState(null);
+    const [loading, setLoading] = useState(null);
+    const [error, useError] = useState(null);
+    
+    useEffect(() => {
+        setLoading(true);
+        fetch(url)
+        .then( res => res.json())
+        .then( json => { setData(json); setLoading(false)})
+        .catch( err => { setError(err); setLoading(false)})
+    })
+    
+    return { data, loading, error};
+}
+
+function CoffeeMenu() {
+    const [ data, loading, error] = useFetch("/api/coffees");
+    
+    if (loading) return <p>Loading</p>
+    if (error) return <p>Something went wrong</p>
+    
+    return <ul>{data.map( c => <li key={c.id}> {c.name} </li>)}</ul>
+}

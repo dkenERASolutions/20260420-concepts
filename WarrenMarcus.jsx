@@ -9,7 +9,7 @@
 // This builds real muscle memory. Do NOT copy-paste.
 // Commit and push after every writing session.
 // ============================================================
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useMemo } from 'react';
 // 
 // WEEK 1 — CONCEPTS
 // 
@@ -302,3 +302,274 @@ function Counter() {
     );
 }
 
+// useContent- Sharing data across components
+// Step 1: Create a context (a "channel" any component can tune into )
+const ThemeCount = createContent("light");
+
+// Step 2: A top level Porvider hands a value to everyone underneath
+function App() {
+    const [theme, setTheme] = useState("light");
+    
+        return(
+        <ThemeContent.Provider value={theme}>
+            <button
+            onClick={() => setTheme( t => t === "light" ? "dark" : "light")}
+            >
+                Toggle Theme
+            </button>
+            <Page />
+        </ThemeContent.Provider>
+    );
+}
+
+function Page() {
+    return(
+    <Card />    
+    );
+}
+
+function Card() {
+    const theme = useContext(ThemeContext);
+    return(
+        <div className={`card card-${theme}`}>
+            Theme is: {theme}
+        </div>
+    );
+}
+
+const ThemeContext = createContent("light")
+
+function App() {
+    const[theme, setTheme] = useState("light");
+    
+    return(
+        <ThemeContext.Provider value={theme}>
+            <button 
+            onClick ={() => setTheme( t => t === "light" ? "dark" : "light")}
+            >
+                Toggle Theme
+            </button>
+            <Page />
+        </ThemeContext.Provider>
+        
+    );
+}
+
+function Card() {
+    const theme = useContext(ThemeContext);
+    return(
+        <div className={`card card-${theme}`}>
+            Theme is: {theme}
+        </div>
+    );
+}
+
+const ThemeContext = createContext("light")
+
+function App() {
+    
+    const[theme, setTheme] = useState("light");
+    return(
+        <ThemeContext.Provider value={theme}>
+            <button
+            onClick={() => setTheme(t => t === "light" ? "dark" : "light")}   
+                  >
+                Toggle Theme
+            </button>
+            <Page />
+        </ThemeContext.Provider>
+    );
+}
+
+function Card() {
+    const theme = useContext(ThemeContext);
+    return(
+        <div className={`card card-${theme}`}>
+            Theme is: {theme}
+        </div>
+    );
+}
+
+const ThemeContext = createContext("light")
+
+function App() {
+    
+    const[theme, setTheme] = useState("light");
+    return(
+        <ThemeContext.Provider value={theme}>
+            <button
+            onClick={() => setTheme(t => t === "light" ? "dark" : "light")}   
+                  >
+                Toggle Theme
+            </button>
+            <Page />
+        </ThemeContext.Provider>
+    );
+}
+
+//  useReducer: the reducer takes the cuttent state + an "action" and returns the next state
+
+function cartReducer( state, action ) {
+    switch (action.type) {
+        case "add":
+            return [...state, action.item];
+            case "remove": 
+            return state.filter(item => item.id !== action.id)
+            case "clear":
+            return [];
+            default:
+                return state;
+    }
+}
+
+function cartReducer() {
+    const [cart, dispatch] = useReducer(cartReducer, []);
+    
+    const addLatte = () =>
+        dispatch({ type: "add", item: { id: Date.now(), name: "Latte" }})
+    return(
+        <div>
+            <button onClick={addLatte}>Add Latte</button>
+            <button onClick={() => dispatch({ type: "clear" })}>Clear</button>
+            <ul>
+                {cart.map( i =>(
+                    <li
+                    key={i.id}
+                    >
+                        {i.name}
+                        <button onClick={() => dispatch({ type: "remove", id: i.id})}>X</button>
+                    </li>
+                ))}
+            </ul>
+        </div>
+    );
+}
+
+function cartReducer( state, action) {
+    switch (action.type) {
+        case "add":
+            return [...state, action.item];
+                 case "remove": 
+            return state.filter(item => item.id !== action.id)
+            case "clear":
+            return [];
+            default:
+                return state;
+    }
+}
+
+function cartReducer() {
+    const [cart, dispatch] = useReducer(cartReducer, []);
+    
+    const addLatte = () =>
+        dispatch({ type: "add", item: { id: Date.now(), name: "Latte" }})
+    return(
+        <div>
+            <button onClick={addLatte}>Add Latte</button>
+            <button onClick={() => dispatch({ type: "clear" })}>Clear</button>
+            <ul>
+                {cart.map( i =>(
+                    <li
+                    key={i.id}
+                    >
+                        {i.name}
+                        <button onClick={() => dispatch({ type: "remove", id: i.id})}>X</button>
+                    </li>
+                ))}
+            </ul>
+        </div>
+    );
+}
+
+function cartReducer( state, action) {
+    switch (action.type) {
+        case "add":
+            return [...state, action.item];
+                 case "remove": 
+            return state.filter(item => item.id !== action.id)
+            case "clear":
+            return [];
+            default:
+                return state;
+    }
+}
+
+function cartReducer() {
+    const [cart, dispatch] = useReducer(cartReducer, []);
+    
+    const addLatte = () =>
+        dispatch({ type: "add", item: { id: Date.now(), name: "Latte" }})
+    return(
+        <div>
+            <button onClick={addLatte}>Add Latte</button>
+            <button onClick={() => dispatch({ type: "clear" })}>Clear</button>
+            <ul>
+                {cart.map( i =>(
+                    <li
+                    key={i.id}
+                    >
+                        {i.name}
+                        <button onClick={() => dispatch({ type: "remove", id: i.id})}>X</button>
+                    </li>
+                ))}
+            </ul>
+        </div>
+    );
+}
+
+// useMemo - Caching an expensive calucation 
+function ProductFilter( {products }) {
+    const [search, setSearch] = useState ("");
+    const [color, setColor] = useState("blue");
+    
+    const filtered = useMemo( () => {
+        console.log("Filtering products...");
+return products.filter( p => p.name.toLowerCase().includes(search.toLocaleLowerCase()));
+    }, [products, search]);
+    
+    return(
+        <div>
+            <input
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            placeholder="Search Products"
+           /> 
+            <input 
+            value={color}
+            onChange={(e) => setColor(e.target.value)}
+            placeholder="Favorite color (does NOT re-filter)"
+            />    
+            <ul>
+                {filtered.map( p => <li key={p.id}>{p.name}</li>)}
+            </ul>
+        </div>
+    );
+}
+
+function ProductFilter( {products }) {
+    const [search, setSearch] = useState ("");
+    const [color, setColor] = useState("blue");
+    
+    const filtered = useMemo( () => {
+        console.log("Filtering products...");
+return products.filter( p => p.name.toLowerCase().includes(search.toLocaleLowerCase()));
+    }, [products, search]);
+    
+    return(
+        <div>
+            <input
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            placeholder="Search Products"
+           /> 
+            <input 
+            value={color}
+            onChange={(e) => setColor(e.target.value)}
+            placeholder="Favorite color (does NOT re-filter)"
+            />    
+            <ul>
+                {filtered.map( p => <li key={p.id}>{p.name}</li>)}
+            </ul>
+        </div>
+    );
+}

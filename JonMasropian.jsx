@@ -264,3 +264,237 @@ function Counter() {
         </div>
     );
 }
+
+// useContext - Sharing data across components
+// Step 1: Create a context ( a "channel" any component can tune into)
+
+const ThemeContext = createContext("light");
+
+//Step 2: A top level provider hands a value to everyone underneath
+function App() {
+    const [theme, setTheme] = useState("light");
+    
+    return(
+        <ThemeContext.Provider value={theme}>
+            <button
+            onClick={ () => setTheme( t => t === "light" ? "dark" : "light")}
+            >
+                Toggle Theme
+            </button>
+            <Page />
+        </ThemeContext.Provider>
+    );
+}
+
+function Page() {
+    return (
+        <Card />
+    );
+}
+
+function Card() {
+    const theme = useContext(ThemeContext);
+    return (
+        <div className={`card card-${theme}`}>
+            Theme is: {theme}
+        </div>
+    );
+}
+
+
+
+const ThemeContext = createContext("light");
+
+function App() {
+    const [theme, setTheme] = useState("light");
+    return(
+        <ThemeContext.Provider vlaue={theme}>
+            <button
+            onClick={ () => setTheme( t => t === "light" ? "dark" : "light")}
+            >
+                Toggle Theme
+            </button>
+            <Page />
+        </ThemeContext.Provider>
+    );
+}
+
+function Page() {
+    return (
+        <Card />
+    );
+}
+
+function Card() {
+    const theme = useContext(ThemeContext);
+    return (
+        <div className={`card card-${theme}`}>
+            Theme is: {theme}
+        </div>
+    );
+}
+
+
+
+const ThemeContext = createContext("light");
+
+function App() {
+    const [theme, setTheme] = useState("light");
+    return (
+        <ThemeContext.Provider value={theme}>
+            <button
+            onClick={ () => setTheme( t => t === "light" ? "dark" : "light")}
+            >
+                Toggle Theme
+            </button>
+            <Page />
+        </ThemeContext.Provider>
+    );
+}
+
+function Page() {
+    return (
+        <Card />
+    );
+}
+
+function Card() {
+    const theme = useContext(ThemeContext);
+    return (
+        <div className={`card card-${theme}`}>
+            Theme is: {theme}
+        </div>
+    );
+}
+
+// useReducer: the reducer takes the current state + an "action" and returns the next state
+
+function cartReducer( state, action ) {
+    switch (action.type) {
+        case "add":
+            return [...state, action.item];
+        case "remove":
+            return state.filter(item => item.id !== action.id)
+        case "clear":
+            return [];
+        default:
+            return state;
+    }
+}
+
+function Cart() {
+    const [cart, dispatch] = useReducer(cartReducer, []);
+    
+    const addLatte = () =>
+        dispatch({ type: "add", item: { id: Date.now(), name: "Latte" }})
+    
+    return (
+        <div>
+            <button onClick={addLatte}>Add Latte</button>
+            <button onClick={() => dispatch({ type: "clear" })}>Clear</button>
+            <ul>
+                {cart.map( i => (
+                    <li key={i.id}>
+                        {i.name}
+                        <button onClick={() => dispatch({ type: "remove", id: i.id })}>x</button>
+                    </li>
+                ))}
+            </ul>
+        </div>
+    );
+}
+
+
+
+function cartReducer( state, action ) {
+    switch (action.type) {
+        case "add":
+            return [...state, action.item];
+        case "remove":
+            return state.filter(item => item.id !== action.id)
+        case "clear":
+            return [];
+        default:
+            return state;
+    }
+}
+
+function Cart() {
+    const [cart, dispatch] = useReducer(cartReducer, []);
+    const addLatte = () =>
+        dispatch({ type: "add", item: { id: Date.now(), name: "Latte" }})
+    
+    return (
+        <div>
+            <button onClick={addLatte}>Add Latte</button>
+            <button onClick={() => dispatch({ type: "clear" })}>Clear</button>
+            <ul>
+                {cart.map( i => (
+                    <li key={i.id}>
+                        {i.name}
+                        <button onClick={() => dispatch({ type: "remove", id: i.id })}>x</button>
+                    </li>
+                ))}
+            </ul>
+        </div>
+    );
+}
+
+
+// useMemo - Caching an exspensive calculation
+function ProductFilter( {products} ) {
+    const [search, setSearch] = useState("");
+    const [color, setColor] = useState("blue");
+    
+    const filtered = useMemo( () => {
+        console.log("Filtering products...");
+        return products.filter( p => p.name.toLowerCase().icludes(search.toLocaleLowerCaes()));
+    }, [products, search]);
+    
+    return (
+        <div>
+            <input
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+                placeholder="Search Products"
+            />
+            <input
+                value={color}
+                onChange={(e) => setColor((e.target.value))}
+                placeholder="Favorite color (does NOT re-filter)"
+            />
+            <ul>
+                {filtered.map( p => <li key={p.id}>{p.name}</li>)}
+            </ul>
+        </div>
+    );
+}
+
+
+function ProductFilter( {products} ) {
+    const [search, setSearch] = useState("");
+    const [color, setColor] = useState("blue");
+    
+    const filtered = useMemo( () => {
+        console.log("Filtering products...");
+        return products.filter( p => p.name.toLowerCase().includes(search.toLocaleLowerCase()));
+    }, [products, search]);
+    
+    return (
+        <div>
+            <input
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+                placeholder="Search Products"
+            />
+            <input
+                value={color}
+                onChange={(e) => setColor((e.target.value))}
+                placeholder="Favorite color (does NOT re-filter)"
+            />
+            <ul>
+                {filtered.map( p => <li key={p.id}>{p.name}</li>)}
+            </ul>
+        </div>
+    );
+}

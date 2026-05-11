@@ -257,3 +257,305 @@ function Counter() {
         </div>
     );
 }
+
+// useContext- Sharing data across components
+// Step 1: create a context ( a "channel" any component can tune into )
+const ThemeContext = createContext("light");
+
+// Step 2: A top level Provider hands a value to everyone underneath
+function App() {
+    const [theme, setTheme] = useState("light");
+    
+    return(
+        <ThemeContext.Provider value={theme}>
+            <button
+                onClick={() => setTheme( t => t === "light" ? "dark" : "light")}
+            >
+                Toggle Theme
+            </button>
+            <Page />
+        </ThemeContext.Provider>
+    );
+}
+
+function Page() {
+    return(
+        <Card />
+    );
+}
+
+function Card() {
+    const theme = useContext(ThemeContext);
+    return(
+        <div className={`card card-${theme}`}>
+            Theme is: {theme}
+        </div>
+    );
+}
+
+// 
+const ThemeContext = createContext("light");
+
+function App() {
+    const [theme, setTheme] = useState("light");
+    
+    return(
+        <ThemeContext.Provider value={theme}>
+            <button
+                onClick={() => setTheme( t => t === "light" ? "dark" : "light")}
+            >
+                Toggle Theme
+            </button>
+            <Page />
+        </ThemeContext.Provider>
+    );
+}
+
+function Page() {
+    return(
+        <Card />
+    );
+}
+
+function Card() {
+    const theme = useContext(ThemeContext);
+    return(
+        <div className={`card card-${theme}`}>
+            Theme is: {theme}
+        </div>
+    );
+}
+
+//
+const ThemeContext = createContext("light");
+
+function App() {
+    const [theme, setTheme] = useState("light");
+    
+    return(
+        <ThemeContext.Provider value={theme}>
+            <button
+                onClick={() => setTheme( t => t === "light" ? "dark" : "light")}
+            >
+                Toggle Theme
+            </button>
+            <Page />
+        </ThemeContext.Provider>
+    );
+}
+
+function Page() {
+    return(
+        <Card />
+    );
+}
+
+function Card() {
+    const theme = useContext(ThemeContext);
+    return(
+        <div className={`card card-${theme}`}>
+            Theme is: {theme}
+        </div>
+    );
+}
+
+// useReducer: the reducer takes the current state + an "action" and returns the next state
+
+function cartReducer( state, action) {
+    switch (action.type) {
+        case "add":
+            return [...state, action.item];
+        case "remove": 
+            return state.filter(item => item.id !== action.id)
+        case "clear":
+            return [];
+        default:
+            return state;
+    }
+}
+
+function Cart() {
+    const [cart, dispatch] = useReducer(cartReducer, []);
+    
+    const addLatte = () =>
+        dispatch({ type: "add", item: { id: Date.now(), name: "Late" }})
+    
+    return(
+        <div>
+            <button onClick={addLatte}>Add Latte</button>
+            <button onClick={() => dispatch({ type: "clear"})}>Clear</button>
+            <ul>
+                {cart.map( i => (
+                    <li
+                        key={i.id}
+                    >
+                        {i.name}
+                        <button onClick={() => dispatch({ type: "remove", id: i.id })}>X</button>
+                    </li>
+                ))}
+            </ul>
+        </div>
+    );
+}
+
+function cartReducer( state, action) {
+    switch (action.type) {
+        case "add":
+            return [...state, action.item];
+        case "remove":
+            return state.filter(item => item.id !== action.id)
+        case "clear":
+            return [];
+        default:
+            return state;
+    }
+}
+
+function Cart() {
+    const [cart, dispatch] = useReducer(cartReducer, []);
+    
+    const addLatte = () =>
+        dispatch({ type: "add", item: { id: Date.now(), name: "Latte" }})
+    
+    return(
+        <div>
+            <button onClick={addLatte}>Add Latte</button>
+            <button onClick={() => dispatch({ type: "clear" })}>Clear</button>
+            <ul>
+                {cart.map( i => (
+                    <li
+                        key={i.id}
+                    >
+                        {i.name}
+                        <button onClick={() => dispatch({ type: "remove", id: i.id})}>X</button>
+                    </li>
+                ))}
+            </ul>
+        </div>
+    );
+}
+
+// useMemo - Caching an expensive calculation
+function ProductFilter( {products} ) {
+    const [search, setSearch] = useState("");
+    const [color, setColor] = useState("blue");
+    
+    const filtered = useMemo( () => {
+        console.log("Filtering products...");
+        return products.filter( p => p.name.toLowerCase().includes(search.toLocaleLowerCase()))
+    }, [products, search]);
+    
+    return(
+        <div>
+            <input
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+                placeholder="Search Products"
+            />
+            <input 
+                value={color}
+                onChange={(e) => setColor(e.target.value)}
+                placeholder="Favorite Color (does NOT re-filter)"
+            />
+            <ul>
+                {filtered.map( p => <li key={p.id}>{p.name}</li>)}
+            </ul>
+        </div>
+    );
+}
+
+function ProductFilter( {products}) {
+    const [search, setSearch] = useState("");
+    const [color, setColor] = useState("blue");
+    
+    const filtered = useMemo( () => {
+        console.log("Filtering products...");
+        return products.filter( p => p.name.toLowerCase().includes(search.toLocaleLowerCase()))
+    }, [products, search]);
+    
+    return(
+        <div>
+            <input 
+                value={search}
+                onChange={(e) => setColor(e.target.value)}
+                placeholder="Search Products"
+            />
+            <input 
+                value={color}
+                onChange={(e) => setColor(e.target.value)}
+                placeholder="Favorite Color (does NOT re-filter)"
+            />
+            <ul>
+                {filtered.map( p => <li key={p.id}>{p.name}</li>)}
+            </ul>
+        </div>
+    );
+}
+
+// Custom Hook - useToggle
+function useToggle( initial = false ) {
+    const [on, setOn] = useState(initial);
+     const toggle = () => setOn(prev => !prev);
+     return [on, toggle];
+}
+
+function Modal() {
+    const [isOpen, toggleOpen] = useToggle(false);
+    
+    return(
+        <div>
+            <button onClick={toggleOpen}> {isOpen ? "Close" : "Open" } modal </button>
+            { isOpen && <div className="modal">I am a modal</div> }
+        </div>
+    );
+}
+
+// custom hook -- useLocalStorage ( this is a state that survives a refresh )
+function useLocalStorage( key, defaultValue ) {
+    const [value, setValue] = useState( () => {
+            const stored = localStorage.getItem(key);
+            return stored !== null ? JSON.parse(stored) : defaultValue;
+        });
+        
+        useEffect(() => {
+            localStorage.setItem(key, JSON.stringify(value));
+        }, [key, value]);
+    return [value, setValue];
+} 
+
+function Settings() {
+    const [username, setUsername] = useLocalStorage("username", "");
+    return(
+        <input 
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            placeholder="Type your name - then refresh the page!"
+        />
+    );
+}
+
+// custom hook - useFetch (reusable data fetching)
+function useFetch(url) {
+    const [data, setData] = useState(null);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+    
+    useEffect(() => {
+        setLoading(true);
+        fetch(url)
+        .then( res => res.json())
+        .then( json => { setData(json); setLoading(false)})
+        .catch( err => { setError(err); setLoading(false)})
+    })
+    
+    return { data, loading, error };
+}
+
+function CoffeeMenu() {
+    const { data, loading, error } = useFetch("/api/coffees");
+    
+    if (loading) return <p>Loading</p>
+    if (error) return <p>Something went wrong.</p>
+    
+    return <ul>{data.map( c => <li key={c.id}> {c.name} </li>)} </ul>
+}
